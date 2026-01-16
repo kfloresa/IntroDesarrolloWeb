@@ -5,3 +5,8 @@ La pizza es un plato hecho con una masa plana que tradicionalmente se cubre con 
 para la masa: harina de trigo tipo 00, agua, levadura, sal y aceite de oliva
 para el agregado: tomate triturado, queso mozzarella y hojas de albahaca fresca
 Hay también diferentes tipos de pizzas con distintos agregados, como rodajas de tomate, diversos tipos de queso, jamón, anchoas, morrones, palmitos, salami, ananá, huevo, champiñones, verduras o cebolla, entre otros.
+
+Sándwich
+
+El sándwich emparedado es una comida a modo de aperitivo.
+Suele consistir en dos rebanadas de pan de molde inglés,​ o de cualquier tipo de pan, entre las cuales se coloca otros alimentos tales como carne, queso y verduras.

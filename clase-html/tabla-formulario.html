@@ -4,52 +4,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabla y formulario</title>
+    <style>
+
+        body {
+            background-color: lavender;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        table caption {
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        label {
+            font-family: monospace;
+        }
+
+        input, select, textarea {
+            background-color: aliceblue;
+        }
+
+        button {
+            box-shadow: 2px 2px 5px;
+            background-color: rgb(241, 238, 218);
+        }
+
+        select {
+            box-shadow: 2px 2px;
+            background-color: rgb(248, 241, 232);
+        }
+
+        h1 {
+            color: rgb(213, 189, 247);
+            text-shadow: 1px 1px blue;
+        }
+
+        .table-text {
+            color: green;
+        }
+        
+    </style>
 </head>
 <body>
-    <table border = "1">
-        <caption>Tabla</caption>
-        <thead>
-            <tr>
-                <th>A</th>
-                <th>B</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>aa</td>
-                <td>ba</td>
-            </tr>
-            <tr>
-                <td>ab</td>
-                <td>bb</td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="2">combinaciones</td>
-            </tr>
-        </tfoot>
-    </table>
-    <br/>
+    <div class="table-text">
+        <h1> Tabla </h1>
+        <table>
+            <caption>Tabla</caption>
+            <thead>
+                <tr>
+                    <th>A</th>
+                    <th>B</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>aa</td>
+                    <td>ba</td>
+                </tr>
+                <tr>
+                    <td>ab</td>
+                    <td>bb</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">combinaciones</td>
+                </tr>
+            </tfoot>
+        </table>
+        <br/>
+    </div>
     <hr/>
-    <br/>
-    <form action = "./submit" method = "post">
-        <label for="name">Nombre:</label>
-        <input type="text" name="name"/>
-        <br/><br/>
-        <label for="pass">Contraseña:</label>
-        <input type="password" name="pass"/>
-        <br/><br/>
-        <label for="drop">Opciones: </label>
-        <select name="drop">
-            <option value="0">opción 1</option>
-            <option value="1">opción 2</option>
-        </select>
-        <br/><br/>
-        <label for="text">Cuadro de texto: </label>
-        <textarea name="text">mucho texto</textarea>
-        <br/><br/>
-        <button type="submit">Enviar</button>
-    </form>
+    <div>
+        <h1> Formulario </h1>
+        <form action = "./submit" method = "post">
+            <label for="name">Nombre:</label>
+            <input type="text" name="name"/>
+            <br/><br/>
+            <label for="pass">Contraseña:</label>
+            <input type="password" name="pass"/>
+            <br/><br/>
+            <label for="drop">Opciones: </label>
+            <select name="drop">
+                <option value="0">opción 1</option>
+                <option value="1">opción 2</option>
+            </select>
+            <br/><br/>
+            <label for="text">Cuadro de texto: </label>
+            <textarea name="text">mucho texto</textarea>
+            <br/><br/>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
 </body>
 </html>

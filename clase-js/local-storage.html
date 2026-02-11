@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON en local storage</title>
+</head>
+<body>
+    <input type="text" id="entrada">
+    <button onclick="guardarDatos()">Guardar datos</button>
+    <button onclick="muestraMensaje()">Muestra mensaje</button>
+    <p id="salida"></p>
+    <script>
+        function guardarDatos() {
+            const nombre = document.getElementById("entrada").value
+            localStorage.setItem("nombre", nombre)
+        }
+
+        function muestraMensaje() {
+            const nombre = localStorage.getItem("nombre")
+            const salida = document.getElementById("salida")
+            salida.textContent = `Hola, ${nombre}`
+        }
+    </script>
+</body>
+</html>

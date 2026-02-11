@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basicos de scripts</title>
+</head>
+<body>
+    <button onclick="mostrarImagen()">Muestra imagen</button>
+    <button onclick="ocultarImagen()">Oculta imagen</button>
+    <hr>
+    <img id="imagen" src="Tucan.jpg" width="200" height="150">
+    <script>
+        function mostrarImagen() {
+            const imagen = document.getElementById("imagen")
+            imagen.style.display = "block"
+        }
+        function ocultarImagen() {
+            const imagen = document.getElementById("imagen")
+            imagen.style.display = "none"
+        }
+    </script>
+</body>
+</html>

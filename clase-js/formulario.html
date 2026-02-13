@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+</head>
+<body>
+    <form>
+        <label>Nombre</label>
+        <input type="text", id="nombre">
+        <br>
+        <label>Color</label>
+        <select id="color">
+            <option>Rojo</option>
+            <option>Azul</option>
+            <option>Verde</option>
+        </select>
+        <br>
+        <button type="submit" onclick="getAnswers()">Guardar</button>
+    </form>
+    <br>
+    <div>
+        <button type="button" onclick="showAnswers()">Mostrar</button>
+        <p id="salida"></p>
+    </div>
+    <script>
+        function getAnswers() {
+            const nombre = document.getElementById("nombre").value
+            const color = document.getElementById("color").value
+            localStorage.setItem("Informacion", JSON.stringify({nombre, color}))
+        }
+
+        function showAnswers() {
+            const salida = document.getElementById("salida")
+            salida.textContent = localStorage.getItem("Informacion")
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+body {
+    background-color: rgb(197, 246, 250);
+    font-size: 16px;
+    margin: 0px;
+    padding: 0px;
+}
+
+h1 {
+    font-size: 48px;
+    font-family: monospace;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+p {
+    font-size: 16px;
+    margin-inline: 10px;
+}
+
+.sections {
+    border: solid blue;
+    border-radius: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-inline: 10px;
+    box-shadow: 3px 3px 3px gray;
+    background-color: rgb(204, 236, 224);
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    border: dotted 2px;
+    background-color: rgba(150, 149, 149, 0.299);
+}
+
+.link {
+    color: cornflowerblue;
+    font-size: 25px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    background-color: gray;
+    width: 100%;
+    margin-top: -25px;
+}
+
+@media (min-width: 630px) {
+    .sections {
+        max-width: 800px;
+        min-width: 600px;
+    }
+}
+
+@media (max-width: 400px) {
+    .disappear_image {
+        display: none
+    }
+}
+
+@media (max-width: 700px) {
+    #biografia {
+        background-color: rgb(209, 114, 114);
+    }
+}
+
+@media (max-width: 300px) {
+    #biografia {
+        background-color: rgb(188, 114, 209);
+    }
+}

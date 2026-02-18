@@ -1,0 +1,20 @@
+{
+    "alumnos" : [
+        {
+            "nombre": "Mariana",
+            "intereses profesionales": [
+                "Programación",
+                "Diseño gráfico",
+                "Fotografía"
+            ]
+        },
+        {
+            "nombre": "Kyrie",
+            "intereses profesionales": [
+                "Computación",
+                "Videojuegos",
+                "Música"
+            ]
+        }
+    ]
+}

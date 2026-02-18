@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intereses Profesionales</title>
+</head>
+<body>
+    <div id="contenedor"></div>
+    <script>
+        const contenedor = document.getElementById("contenedor")
+        const info = fetch("intereses_profesionales.json")
+        .then(respuesta => respuesta.json())
+        .then((datos) => {
+            datos.alumnos.forEach(alumno => {
+                const nodo = document.createElement("p")
+                nodo.textContent = alumno.nombre
+                nodo.style.fontSize = "18px"
+                contenedor.appendChild(nodo)
+                const lista = document.createElement("ol")
+                alumno["intereses profesionales"].forEach(interes => {
+                    const elemento = document.createElement("li")
+                    elemento.textContent = interes
+                    lista.appendChild(elemento)
+                })
+                contenedor.appendChild(lista)
+            })
+        }).catch((error) => console.log("Error: ", error))
+    </script>
+</body>
+</html>

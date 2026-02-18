@@ -9,12 +9,13 @@
     <div id="contenedor"></div>
     <script>
         const contenedor = document.getElementById("contenedor")
-        const info = fetch("intereses_profesionales.json").then((respuesta) => {
-            return respuesta.json()
-        }).then((datos) => {
+        const info = fetch("intereses_profesionales.json")
+        .then(respuesta => respuesta.json())
+        .then((datos) => {
             datos.alumnos.forEach(alumno => {
                 const nodo = document.createElement("p")
                 nodo.textContent = alumno.nombre
+                nodo.style.fontSize = "18px"
                 contenedor.appendChild(nodo)
                 const lista = document.createElement("ol")
                 alumno["intereses profesionales"].forEach(interes => {

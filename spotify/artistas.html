@@ -1,20 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artistas Spotify</title>
 </head>
 <body>
+    <div id="contenedor"></div>
+    <h1 id="nom_artista"></h1>
+    <img id="img_artista">
+    <p id="seg_artista"></p>
+    <a id="url_artista"></a>
     <script>
-        function obtenerArtista() {
-            fetch("https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg", {
-                headers:{
-                    Authorization: "Bearer TOKEN"
-                }
-            })
-        }
-        obtenerArtista()
+      function obtenerArtista() {
+        const parametros = {
+          method: "GET",
+          headers: {
+            Authorization:
+              "Bearer XXXXX",
+          },
+        };
+
+        fetch(
+          "https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg",
+          parametros,
+        ).then(respuesta => respuesta.json())
+        .then(datos => {
+            let info = "<h1>"
+            info += datos.name + "</h1><img src='"
+            info += datos.images[0].url + "''><p>Cantidad de seguidores: "
+            info += datos.followers.total + "</p><a href='"
+            info += datos.external_urls.spotify + "'>Link a Spotify</a>"
+            const contenedor = document.getElementById("contenedor")
+            contenedor.innerHTML = info
+        })
+        .catch(error => console.error("Error al obtener el artista:", error));
+      }
+
+      obtenerArtista();
     </script>
 </body>
 </html>

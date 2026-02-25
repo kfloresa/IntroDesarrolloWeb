@@ -17,7 +17,7 @@
           method: "GET",
           headers: {
             Authorization:
-              "Bearer XXXXX",
+              "Bearer BQB47_djNpa54auKKkbvtNKUcWTGd5tZOk6-tqJvOKM1r9j3m28NGjYb5JfdI4yW4UJp_Sq0HZL2cl2QV0WmjnWS0QAMjqgPR9qERHVMbPfPaYnPzcea0Or1_2esSolyA1WBtryAnLw",
           },
         };
 
@@ -28,7 +28,7 @@
         .then(datos => {
             let info = "<h1>"
             info += datos.name + "</h1><img src='"
-            info += datos.images[0].url + "''><p>Cantidad de seguidores: "
+            info += datos.images[0].url + "'><p>Cantidad de seguidores: "
             info += datos.followers.total + "</p><a href='"
             info += datos.external_urls.spotify + "'>Link a Spotify</a>"
             const contenedor = document.getElementById("contenedor")

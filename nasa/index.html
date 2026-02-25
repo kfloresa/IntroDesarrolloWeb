@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
+    <title>Nasa picture</title>
+</head>
+<body>
+    <div id="contenedor"></div>
+    <script>
+        function obtenerJSON() {
+            fetch("https://api.nasa.gov/planetary/apod?api_key=KPbq9hwJRKL1775SGZHQjGhiyYCFCgDI5ZkQEof1")
+            .then(respuesta => {
+                return respuesta.json()
+            })
+            .then(datos => {
+                mostrarImagen(datos)
+            })
+            .catch(error => console.error("Error al recuperar imagen: ", error))
+        }
+
+        function mostrarImagen(datos) {
+            const contenedor = document.getElementById("contenedor")
+            contenedor.innerHTML = `
+            <div class="card" style="width: 18rem;">
+                <img src="${datos.url}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">${datos.title}</h5>
+                    <p class="card-text">${datos.explanation}</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>`
+        }
+        obtenerJSON()
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Selección artistas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="input-group mb-3">
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInputGroup1" placeholder="Token">
+            <label for="floatingInputGroup1">Token</label>
+        </div>
+    </div>
+    <button type="button" class="btn btn-outline-primary" onclick="ingresarToken()">Ingresar</button>
+    <div class="form-floating">
+        <select class="form-select" id="floatingSelect" aria-label="Tracks" onchange="cambioSelect">
+            <option selected value="0">Elige un track</option>
+            <option value="1">deja vu</option>
+            <option value="2">me reúso</option>
+            <option value="3">baile inolvidable</option>
+            <option value="4">otro</option>
+        </select>
+    </div>
+    <div id="track"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script>
+        function ingresarToken() {
+            token = document.getElementById("floatingInputGroup1").value
+            sessionStorage.setItem("token", token)
+        }
+
+        function cambioSelect() {
+            selected = document.getElementById("floatingSelect").value
+            if (selected > 0) {
+                switch (selected) {
+                    case 1:
+                        id = ""
+                        break
+                    case 2:
+                        id = ""
+                        break
+                    case 3:
+                        id = ""
+                        break
+                    default:
+                        id = ""
+                }
+                obtenerTrack(id)
+            }
+        }
+
+        async function obtenerTrack(id) {
+            token = sessionStorage.getItem("token")
+            const parametros = {
+                method: "GET",
+                headers: {
+                    Authorization:
+                    `Bearer ${token}`,
+                },
+            }
+            fetch(`https://api.spotify.com/v1/tracks/${id}`, parametros)
+            .then(respuesta => respuesta.json())
+            .then(datos => {
+                const card = `
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+`
+            })
+        }
+    </script>
+  </body>
+</html>

@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   </head>
   <body>
+    <h1 class="display-3">Selección</h1>
     <div class="input-group mb-3">
         <div class="form-floating">
             <input type="text" class="form-control" id="floatingInputGroup1" placeholder="Token">
@@ -15,39 +16,45 @@
     </div>
     <button type="button" class="btn btn-outline-primary" onclick="ingresarToken()">Ingresar</button>
     <div class="form-floating">
-        <select class="form-select" id="floatingSelect" aria-label="Tracks" onchange="cambioSelect">
+        <select class="form-select" id="floatingSelect" aria-label="Tracks" onchange="cambioSelect()">
             <option selected value="0">Elige un track</option>
             <option value="1">deja vu</option>
             <option value="2">me reúso</option>
             <option value="3">baile inolvidable</option>
-            <option value="4">otro</option>
+            <option value="4">rag doll physics</option>
         </select>
     </div>
     <div id="track"></div>
+    <div id="err"></div>
+    <button type="button" class="btn btn-outline-primary" onclick="limpiarPagina()">Limpiar</button>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script>
         function ingresarToken() {
-            token = document.getElementById("floatingInputGroup1").value
+            const token = document.getElementById("floatingInputGroup1").value
             sessionStorage.setItem("token", token)
         }
 
         function cambioSelect() {
-            selected = document.getElementById("floatingSelect").value
+            const selected = document.getElementById("floatingSelect").value
             if (selected > 0) {
                 switch (selected) {
-                    case 1:
-                        id = ""
+                    case "1":
+                        id = "6HU7h9RYOaPRFeh0R3UeAr"
                         break
-                    case 2:
-                        id = ""
+                    case "2":
+                        id = "6De0lHrwBfPfrhorm9q1Xl"
                         break
-                    case 3:
-                        id = ""
+                    case "3":
+                        id = "2lTm559tuIvatlT1u0JYG2"
                         break
                     default:
-                        id = ""
+                        id = "1XgBVZBrAOSphup129VUKs"
                 }
                 obtenerTrack(id)
+            }
+            else {
+                const track = document.getElementById("track")
+                track.innerHTML = ""
             }
         }
 
@@ -63,17 +70,49 @@
             fetch(`https://api.spotify.com/v1/tracks/${id}`, parametros)
             .then(respuesta => respuesta.json())
             .then(datos => {
+                let lista_artistas = ""
+                datos.artists.forEach(artista => {
+                    lista_artistas += `<li class="list-group-item"><a href="${artista.external_urls.spotify}">${artista.name}</a></li>\n`
+                })
                 const card = `
                 <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="${datos.album.images[0].url}" class="card-img-top" alt="Imagen del album">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 class="card-title">${datos.name}</h5>
+                        <p class="card-text">Tipo de album: ${datos.album.album_type}</p>
+                        <p class="card-text">Total de canciones: ${datos.album.total_tracks}</p>
+                        <p class="card-text">Nombre del album: ${datos.album.name}</p>
+                        <p class="card-text">Artistas:</p>
+                        <ul class="list-group list-group-flush">
+                            ${lista_artistas}
+                        </ul>
                     </div>
                 </div>
-`
+                `
+                const track = document.getElementById("track")
+                track.innerHTML = card
             })
+            .catch(error => {
+                const track = document.getElementById("track")
+                track.innerHTML = ""
+                const err = document.getElementById("err")
+                err.innerHTML = `
+                <div class="alert alert-danger" role="alert">
+                Error obteniendo datos: ${error}
+                </div>
+                `
+            })
+        }
+
+        function limpiarPagina() {
+            const track = document.getElementById("track")
+            track.innerHTML = ""
+            const err = document.getElementById("err")
+            err.innerHTML = ""
+            const token = document.getElementById("floatingInputGroup1")
+            token.value = ""
+            const selected = document.getElementById("floatingSelect")
+            selected.value = "0"
         }
     </script>
   </body>

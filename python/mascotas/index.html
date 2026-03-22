@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mascotas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+    <h1>Adopción de Mascotas</h1>
+
+    <p class="d-inline-flex gap-1">
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#ver-solicitudes" role="button" aria-expanded="false">
+            Ver solicitudes
+        </a>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#solicitudAdopcion" role="button" aria-expanded="false">
+            Solicitar adopción
+        </a>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#solicitudAdopcion" role="button" aria-expanded="false">
+            Actualizar solicitud
+        </a>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#solicitudAdopcion" role="button" aria-expanded="false">
+            Actualizar estado de solicitud
+        </a>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#solicitudAdopcion" role="button" aria-expanded="false">
+            Eliminar solicitud
+        </a>
+    </p>
+
+    <div class="collapse" id="ver-solicitudes">
+        <div class="card card-body">
+            <h2>Ver solicitudes</h2>
+            <form onsubmit="getSolicitudes(event, this)">
+                <div class="mb-3">
+                    <label for="id-solicitud-buscada" class="form-label">Id de solicitud</label>
+                    <input type="text" name="id-solicitud" class="form-control" id="id-solicitud-buscada" aria-describedby="ayuda-ver-solicitud">
+                    <div id="ayuda-ver-solicitud" class="form-text">Deja este campo vacío para ver todas las solicitudes.</div>
+                </div>
+                <!--TODO: añadir opción para nombre-->
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+            <div id="info-solicitudes"></div>
+        </div>
+    </div>
+
+    <div class="collapse" id="solicitudAdopcion">
+        <div class="card card-body">
+            <h2>Solicitar adopción</h2>
+            <form onsubmit="solicitarAdopcion(event, this)">
+                <div class="mb-3">
+                    <label for="nombre-persona" class="form-label">Tu nombre</label>
+                    <input type="text" class="form-control" id="nombre-persona">
+                </div>
+                <div class="mb-3">
+                    <label for="mascota-deseada" class="form-label">Mascota deseada</label>
+                    <input type="text" class="form-control" id="mascota-deseada">
+                </div>
+                <div class="mb-3">
+                    <label for="motivo-solicitud" class="form-label">Motivo</label>
+                    <textarea class="form-control" aria-label="With textarea" id="motivo-solicitud"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Solicitar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script>
+        const url_base = "https://introdesarrolloweb.onrender.com/"
+
+        async function getSolicitudes(event, form) {
+            event.preventDefault()
+            const data = Object.fromEntries(new FormData(form))
+            const info_solicitudes = document.getElementById("info-solicitudes")
+
+            try {
+                const response = await fetch(url_base + "solicitudes/" + data["id-solicitud"], {
+                    method: "GET",
+                    headers: {"Content-Type": "application/json"}
+                })
+                if (response.ok) {
+                    const info = await response.json()
+                    info_solicitudes.textContent = JSON.stringify(info)
+                }
+                else {
+                    info_solicitudes.textContent = ""
+                    console.error("Error:", response)
+                    alert("Hubo un error con la solicitud")
+                }
+            } catch (error) {
+                console.error("Error:", error)
+                alert("Hubo un error al enviar la solicitud")
+            }
+        }
+
+        async function solicitarAdopcion(event, form) {
+            event.preventDefault()
+            const data = Object.fromEntries(new FormData(form))
+
+            try {
+                const response = await fetch("", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(data)
+                })
+            } catch (error) {
+                console.error("Error:", error)
+                alert("Hubo un error al enviar la solicitud")
+            }
+        }
+
+    </script>
+  </body>
+</body>
+</html>

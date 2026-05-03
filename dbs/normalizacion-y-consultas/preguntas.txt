@@ -1,0 +1,57 @@
+1. total de usuarios por país ---> aquí es necesario mostras el nombre del país y el total de usuarios como número
+SELECT Paises.nombre as Pais, COUNT(Usuarios.id) as Num_usuarios
+FROM Paises LEFT JOIN Usuarios ON Usuarios.pais_id = Paises.id
+GROUP BY Paises.id
+
+2. número de actores registrados por película ---> mostrar el nombre de la película y el total de actores
+SELECT Peliculas.titulo AS Pelicula, COUNT(Actores.id) as Num_actores
+FROM Peliculas LEFT JOIN PeliculaActor ON Peliculas.id = PeliculaActor.pelicula_id
+JOIN Actores ON PeliculaActor.actor_id = Actores.id
+GROUP BY Peliculas.id
+
+3. mostrar las películas en las que haya dos o más actores ---> mostrar el nombre de la película únicamente (tip: la respuesta de la consulta anterior te puede ayudar a contestar esta)
+SELECT Peliculas.titulo AS Pelicula
+FROM Peliculas JOIN PeliculaActor ON Peliculas.id = PeliculaActor.pelicula_id
+GROUP BY Peliculas.id HAVING COUNT(PeliculaActor.actor_id) >= 2
+
+4. total de usuarios registrados por año -> mostrar el año a cuatro dígitos YYYY y el total de usuarios
+SELECT substr(fecha_registro, 1, 4), COUNT(id)
+FROM Usuarios
+GROUP BY substr(fecha_registro, 1, 4)
+
+5. total de usuarios registrados por país y por año -> mostrar el país, el año y el total de personas registradas en ese país y en ese año
+SELECT Paises.nombre as Pais, substr(Usuarios.fecha_registro, 1, 4) as Año, COUNT(Usuarios.id) AS Num_usuarios
+FROM Paises JOIN Usuarios ON Paises.id = Usuarios.pais_id
+group by Paises.id, substr(Usuarios.fecha_registro, 1, 4)
+
+6. peliculas por actor -> debe mostrar el nombre del actor y el nombre de la película
+SELECT Actores.nombre as Actor, Peliculas.titulo as Pelicula
+FROM Actores JOIN PeliculaActor ON Actores.id = PeliculaActor.actor_id
+JOIN Peliculas on PeliculaActor.pelicula_id = Peliculas.id
+
+7. los actores que aparezcan en la película "Los Juegos del Hambre" -> esto debe de ser filtrado por el texto "Los Juegos del Hambre" en tu query. Debes hacer JOINS de las tablas actores, pelicula actor y pelicula 
+SELECT Actores.nombre as Actor
+FROM Actores JOIN PeliculaActor ON Actores.id = PeliculaActor.actor_id
+JOIN Peliculas on PeliculaActor.pelicula_id = Peliculas.id
+WHERE Peliculas.titulo = 'Los Juegos del Hambre'
+
+8. ¿Cuántos minutos ha empleado cada usuario en ver las películas? -> nombre del usuario y la cantidad de minutos acumulada entre todas las películas
+Select Usuarios.nombre As Usuario, SUM(Reproducciones.minutos_vistos) as Minutos
+FROM Usuarios JOIN Reproducciones ON Usuarios.id = Reproducciones.usuario_id
+GROUP BY Usuarios.id
+
+9. Películas que no hayan tenido reproducciones
+Select Peliculas.titulo As Pelicula
+From Peliculas LEFT JOIN Reproducciones ON Peliculas.id = Reproducciones.pelicula_id
+WHERE Reproducciones.id IS NULL
+
+reto:
+
+10. actores de las películas que hayan sido vistas por usuarios de España
+SELect Actores.nombre AS Actor
+From Actores JOIN PeliculaActor ON Actores.id = PeliculaActor.actor_id
+JOIN Peliculas ON PeliculaActor.pelicula_id = Peliculas.id
+JOIN Reproducciones ON Peliculas.id = Reproducciones.pelicula_id
+JOIN Usuarios ON Reproducciones.usuario_id = Usuarios.id
+JOIN Paises ON Usuarios.pais_id = Paises.id
+WHERE Paises.nombre = 'España'

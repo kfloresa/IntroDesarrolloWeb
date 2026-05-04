@@ -4,6 +4,7 @@ import './App.css'
 import { Carreras } from '../components/Carreras.jsx'
 import Alerta from '../components/Alerta.jsx'
 import BotonOperacion from '../components/BotonOperacion.jsx'
+import TodoList from '../components/TodoList/TodoList.jsx'
 
 function App() {
   const [contador, setContador] = useState(0)
@@ -23,6 +24,7 @@ function App() {
       <BotonOperacion cambiar={setContador} operacion="-" numero={2} />
       <BotonOperacion cambiar={setContador} operacion="+" numero={1} />
 
+      <TodoList />
     </div>
     );
 }
